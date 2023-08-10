@@ -49,7 +49,7 @@ python setup.py develop
 # MACOSX_DEPLOYMENT_TARGET=10.9 CC=clang CXX=clang++ python setup.py develop
 # for C++ debugging, please use DEBUG=1
 # DEBUG=1 python setup.py develop
-pip install flake8 typing mypy pytest pytest-mock scipy
+pip install mypy pytest pytest-mock scipy
 ```
 You may also have to install `libpng-dev` and `libjpeg-turbo8-dev` libraries:
 ```bash
@@ -73,12 +73,11 @@ If you would like to contribute a new model, please see [here](#New-architecture
 
 If you would like to contribute a new dataset, please see [here](#New-dataset). 
 
-### Code formatting and typing
+### Code formatting and linting
 
 #### Formatting
 
-The torchvision code is formatted by [black](https://black.readthedocs.io/en/stable/),
-and checked against pep8 compliance with [flake8](https://flake8.pycqa.org/en/latest/).
+The torchvision code is formatted by [black](https://black.readthedocs.io/en/stable/).
 Instead of relying directly on `black` however, we rely on
 [ufmt](https://github.com/omnilib/ufmt), for compatibility reasons with Facebook
 internal infrastructure.
@@ -97,11 +96,18 @@ files that were edited in your PR with e.g.:
 ufmt format `git diff main --name-only`
 ```
 
-Similarly, you can check for `flake8` errors with `flake8 torchvision`, although
-they should be fairly rare considering that most of the errors are automatically
-taken care of by `ufmt` already.
+#### Linting
 
-##### Pre-commit hooks
+The codebase's pep8 compliance is checked with [flake8](https://flake8.pycqa.org/en/latest/).
+
+To check for flake8 errors:
+1. Install `flake8` with `pip install flake8==6.0.0'
+2. Run `flake8 torchvision`
+
+Errors should be fairly rare considering that most are automatically
+taken care of by `ufmt`.
+
+#### Pre-commit hooks
 
 For convenience and **purely optionally**, you can rely on [pre-commit
 hooks](https://pre-commit.com/) which will run both `ufmt` and `flake8` prior to
@@ -117,7 +123,7 @@ more and improve your workflow. You'll see for example that `pre-commit run
 commit anything, and that the `--no-verify` flag can be added to `git commit` to
 temporarily deactivate the hooks.
 
-#### Type annotations
+### Type annotations
 
 The codebase has type annotations, please make sure to add type hints if required. We use `mypy` tool for type checking:
 ```bash

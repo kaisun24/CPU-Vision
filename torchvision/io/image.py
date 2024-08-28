@@ -392,7 +392,7 @@ def decode_webp(
     return torch.ops.image.decode_webp(input, mode.value)
 
 
-def _decode_avif(
+def decode_avif(
     input: torch.Tensor,
     mode: ImageReadMode = ImageReadMode.UNCHANGED,
 ) -> torch.Tensor:

@@ -36,5 +36,7 @@ else
   pip install auditwheel
 fi
 
+conda install libavif -c pytorch-nightly -y
+
 pip install numpy pyyaml future ninja
 pip install --upgrade setuptools==72.1.0
